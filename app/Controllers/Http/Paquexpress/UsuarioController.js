@@ -1,6 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
-const { validateAll } = use('validator')
+const Token = use('App/Models/Token')
 class UsuarioController {
 
   async registrar ({ request, response }) {
@@ -28,22 +28,13 @@ class UsuarioController {
    return user
  }
  async iniciar ({ request,auth, response }) {
-     try {
-        // Recuperar todo del request
-     let {email, password} = request.all();
-      let token=await auth.attempt(email, password)
-       //   // let user = await User.findBy('email', email)
-       //   // let token = await auth.generate(user)
-       //   return response.status(201).json(token)
-       return response.status(201).json(token)
 
-     }
-     catch (e) {
-       return response.status(400).json({
-         message:'Ups!algo ocurrio,intenta de nuevo mas tarde'
-       })
-     }
-   }
+  const { email, password } = await request.all();
+
+        let token = await auth.withRefreshToken().attempt(email, password)
+
+        return token;
+}
 
   async cerrar ({ request,auth, response }) {
     try{
@@ -86,6 +77,35 @@ class UsuarioController {
          message: 'Ocurrio un error'
      })
     }
+  }
+
+  async edit({params,response})
+  {
+    const user = await User.find(params.id)
+    return response.status(200).json({
+      Usuario: user
+  })
+  }
+  async update({params,request,response})
+  {
+    const user = await User.find(params.id)
+    const objeto = request.all();
+    user.username = objeto.username
+    user.email = objeto.email
+    user.password = objeto.password
+    await user.save()
+    return response.status(200).json({
+      Usuario: 'Usuario actualizado con exito!'
+  })
+  }
+  async delete({params,request,response})
+  {
+    const user = await User.find(params.id)
+    await user.delete();
+    return response.status(200).json({
+      Usuario: 'Usuario borrado con exito!'
+  })
+
   }
 
 
