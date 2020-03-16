@@ -11,6 +11,7 @@ class EnviosSchema extends Schema {
       table.integer('id_Producto').unsigned().references('id').inTable('productos');
       table.integer('id_transporte').unsigned().references('id').inTable('transportes');
       table.integer('id_Ciudad').unsigned().references('id').inTable('ciudades');
+      table.integer('id_Pago').unsigned().references('id').inTable('pagos');
       table.timestamps()
     })
   }

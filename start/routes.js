@@ -19,42 +19,42 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
-Route.post('registrar', 'Paquexpress/UsuarioController.registrar')
+Route.post('registrar', 'Paquexpress/UsuarioController.registrar');
 
-// Route::post('/Generar/{id}','Envios\UsuariosController.Generar');
-// Route::delete('/Generar/{id}','Envios\UsuariosController.BorrarT');
+// Route::post('/Generar/{id}','Envios/UsuariosController.Generar');
+// Route::delete('/Generar/{id}','Envios/UsuariosController.BorrarT');
 // // Usuarios
-Route.get('Usuarios','Envios\UsuarioController.index');
-Route.post('Usuarios','Envios\UsuarioController.Insertar');
-Route.Put('Usuarios/{id}','Envios\UsuarioController.update');
-Route.delete('Usuarios/{id}','Envios\UsuarioController.Borrar');
+Route.get('Usuarios','Paquexpress/UsuarioController.index');
+Route.post('Usuarios','Paquexpress/UsuarioController.Insert');
+// Route.Put('Usuarios/{id}','Paquexpress\UsuarioController.update');
+// Route.delete('Usuarios/{id}','Paquexpress\UsuarioController.Borrar');
 
-// // Ciudades
- Route.get('Ciudades','Envios\CiudadeController.index');
- Route.post('Ciudades','Envios\CiudadeController.Insertar');
- Route.Put('Ciudades/{id}','Envios\CiudadeController.update');
- Route.delete('Ciudades/{id}','Envios\CiudadeController.Borrar');
+// // // Ciudades
+//  Route.get('Ciudades','Paquexpress\CiudadeController.index');
+//  Route.post('Ciudades','Paquexpress\CiudadeController.Insertar');
+//  Route.Put('Ciudades/{id}','Paquexpress\CiudadeController.update');
+//  Route.delete('Ciudades/{id}','Paquexpress\CiudadeController.Borrar');
 
-// // Productos
- Route.get('Productos','Envios\ProductoController.index');
- Route.post('Productos','Envios\ProductoController.Insertar');
- Route.Put('Productos/{id}','Envios\ProductoController.update');
- Route.delete('Productos/{id}','Envios\ProductoController.Borrar');
+// // // Productos
+//  Route.get('Productos','Paquexpress\ProductoController.index');
+//  Route.post('Productos','Paquexpress\ProductoController.Insertar');
+//  Route.Put('Productos/{id}','Paquexpress\ProductoController.update');
+//  Route.delete('Productos/{id}','Paquexpress\ProductoController.Borrar');
 
-// // Transportes
- Route.get('Transportes','Envios\TransporteController.index');
- Route.post('Transportes','Envios\TransporteController.Insertar');
- Route.Put('Transportes/{id}','Envios\TransporteController.update');
- Route.delete('Transportes/{id}','Envios\TransporteController.Borrar');
+// // // Transportes
+//  Route.get('Transportes','Paquexpress\TransporteController.index');
+//  Route.post('Transportes','Paquexpress\TransporteController.Insertar');
+//  Route.Put('Transportes/{id}','Paquexpress\TransporteController.update');
+//  Route.delete('Transportes/{id}','Paquexpress\TransporteController.Borrar');
 
-// // Vendedores
- Route.get('Vendedores','Envios\VendedoreController.index');
- Route.post('Vendedores','Envios\VendedoreController.Insertar');
- Route.Put('Vendedores/{id}','Envios\VendedoreController.update');
- Route.delete('Vendedores/{id}','Envios\VendedoreController.Borrar');
+// // // Vendedores
+//  Route.get('Vendedores','Paquexpress\VendedoreController.index');
+//  Route.post('Vendedores','Paquexpress\VendedoreController.Insertar');
+//  Route.Put('Vendedores/{id}','Paquexpress\VendedoreController.update');
+//  Route.delete('Vendedores/{id}','Paquexpress\VendedoreController.Borrar');
 
-// // Envios
- Route.get('Envios','Envios\EnvioController.index');
- Route.post('Envios','Envios\EnvioController.Insertar');
- Route.Put('Envios/{id}','Envios\EnvioController.update');
- Route.delete('Envios/{id}','Envios\EnvioController.Borrar');
+// // // Envios
+//  Route.get('Envios','Envios\EnvioController.index');
+//  Route.post('Envios','Envios\EnvioController.Insertar');
+//  Route.Put('Envios/{id}','Envios\EnvioController.update');
+//  Route.delete('Envios/{id}','Envios\EnvioController.Borrar');

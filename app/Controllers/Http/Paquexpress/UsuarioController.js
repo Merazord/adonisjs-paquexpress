@@ -1,5 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
+const { validateAll } = use('validator')
 class UsuarioController {
 
   async registrar ({ request, response }) {
@@ -21,9 +22,10 @@ class UsuarioController {
          })
      }
  }
- async index({request,response})
+ async index ({request,auth, response })
  {
-
+   let user = User.all()
+   return user
  }
  async iniciar ({ request,auth, response }) {
      try {
@@ -64,11 +66,28 @@ class UsuarioController {
     }
 
   }
-  async all ({request,auth, response })
+  async Insert ({request,response})
   {
-    let user = User.all()
-    return user
+    try
+    {
+      const objeto = request.all();
+      const user = new User()
+      user.username = objeto.username
+      user.email = objeto.email
+      user.password = objeto.password
+      await user.save()
+
+     return response.status(200).json({
+         message: 'Usuario creado con exito'
+     })
+    }catch(error)
+    {
+     return response.status(404).json({
+         message: 'Ocurrio un error'
+     })
+    }
   }
+
 
 }
 
