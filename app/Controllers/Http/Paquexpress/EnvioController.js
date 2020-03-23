@@ -5,6 +5,7 @@ const Producto = use('App/Models/Paquexpress/Producto')
 const Transporte = use('App/Models/Paquexpress/Transporte')
 const Ciudad = use('App/Models/Paquexpress/Ciudade')
 const Pago = use('App/Models/Paquexpress/Pago')
+const Usuario = use('App/Models/User');
 class EnvioController {
 
   async index ({request,auth, response })
@@ -38,7 +39,7 @@ class EnvioController {
       envios.id_Producto = objeto.id_Producto
       envios.id_transporte = objeto.id_transporte
       envios.id_Ciudad = objeto.id_Ciudad
-      envios.id_Pago = objeto.id_Pago
+      // envios.id_Pago = objeto.id_Pago
       await envios.save()
 
      return response.status(200).json({
@@ -80,6 +81,35 @@ class EnvioController {
       Envio: 'Envio borrada con exito!'
   })
 
+  }
+
+  async dashboard({request,response})
+  {
+    let productoCount = await Producto.query().count();
+    const totalproductos = productoCount[0]['count(*)']
+
+    let transporteCount = await Transporte.query().count();
+    const totaltransportes = transporteCount[0]['count(*)']
+
+    let ciudadCOunt = await Ciudad.query().count();
+    const totalCiudades = ciudadCOunt[0]['count(*)']
+
+    let vendedorCount = await Vendedor.query().count();
+    const totalvendedor = vendedorCount[0]['count(*)']
+
+    let EnvioCount = await Envio.query().count();
+    const totalEnvio = EnvioCount[0]['count(*)']
+    let UsuarioCount = await Usuario.query().count();
+    const totalUsuarios = UsuarioCount[0]['count(*)']
+                 // returns number
+    return response.status(200).json({
+      productos: totalproductos,
+      transportes : totaltransportes,
+      ciudades : totalCiudades,
+      vendedores : totalvendedor,
+      envios : totalEnvio,
+      usuarios : totalUsuarios
+  })
   }
 
 }

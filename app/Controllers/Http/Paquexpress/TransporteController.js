@@ -13,9 +13,9 @@ class TransporteController {
     {
       const objeto = request.all();
       const transportes = new Transporte()
-      transportes.Tipo = objeto.tipo
-      transportes.Marca = objeto.marca
-      transportes.Nombre = objeto.nombre
+      transportes.Tipo = objeto.Tipo
+      transportes.Marca = objeto.Marca
+      transportes.Nombre = objeto.Nombre
       await transportes.save()
 
      return response.status(200).json({
@@ -39,9 +39,9 @@ class TransporteController {
   {
     const transportes = await Transporte.find(params.id)
     const objeto = request.all();
-    transportes.Tipo = objeto.tipo
-    transportes.Marca = objeto.marca
-    transportes.Nombre = objeto.nombre
+    transportes.Tipo = objeto.Tipo
+    transportes.Marca = objeto.Marca
+    transportes.Nombre = objeto.Nombre
     await transportes.save()
     return response.status(200).json({
       Transporte: 'Transporte actualizado con exito!'

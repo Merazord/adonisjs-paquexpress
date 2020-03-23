@@ -16,24 +16,21 @@ class UsuarioController {
              user: user
          })
      } catch (error) {
-         return response.status(400).json({
-             status: 'error',
+         return response.status(406).json({
              message: 'There was a problem creating the user, p  lease try again later.'
          })
      }
  }
  async index ({request,auth, response })
  {
-   let user = User.all()
-   return user
+   let user = await User.all()
+   return response.json(user);
  }
  async iniciar ({ request,auth, response }) {
 
-  const { email, password } = await request.all();
-
-        let token = await auth.withRefreshToken().attempt(email, password)
-
-        return token;
+  const { email, password } = request.only(['email', 'password']);
+  const token = await auth.attemp(email,password);
+   return response.json(token);
 }
 
   async cerrar ({ request,auth, response }) {
@@ -49,7 +46,7 @@ class UsuarioController {
      })
     }catch(e)
     {
-     return response.status(404).json({
+     return response.status(500).json({
          message: 'Ocurrio un error',
          error: event
 
@@ -59,24 +56,23 @@ class UsuarioController {
   }
   async Insert ({request,response})
   {
-    try
-    {
-      const objeto = request.all();
-      const user = new User()
-      user.username = objeto.username
-      user.email = objeto.email
-      user.password = objeto.password
-      await user.save()
+     const objeto = request.all();
+         const user = new User()
+         user.email = objeto.email;
+         user.username = objeto.username;
+         user.password = objeto.password;
+         if(await user.save())
+         {
+           return response.status(201).json({
+            message: 'usuario creado con exito',
+            user: user
+        })
 
-     return response.status(200).json({
-         message: 'Usuario creado con exito'
-     })
-    }catch(error)
-    {
-     return response.status(404).json({
-         message: 'Ocurrio un error'
-     })
-    }
+         }
+         return response.status(500).json({
+          message: 'Ocurrio un error'
+      })
+
   }
 
   async edit({params,response})

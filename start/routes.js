@@ -19,6 +19,7 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
+Route.group(() => {
 Route.post('registrar', 'Paquexpress/UsuarioController.registrar');
 // Generar y Revocar token
 Route.post('iniciar', 'Paquexpress/UsuarioController.iniciar');
@@ -66,5 +67,8 @@ Route.get('Envios/:id','Paquexpress/EnvioController.edit');
 Route.put('Envios/:id','Paquexpress/EnvioController.update');
 Route.delete('Envios/:id','Paquexpress/EnvioController.delete');
 
+Route.get('Dashboard','Paquexpress/EnvioController.dashboard');
+
 // // Clima
 Route.post('Clima','Paquexpress/ClimaController.consultar');
+}).prefix('api')

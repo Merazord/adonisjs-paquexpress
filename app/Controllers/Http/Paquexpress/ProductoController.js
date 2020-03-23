@@ -13,9 +13,9 @@ class ProductoController {
     {
       const objeto = request.all();
       const productos = new Producto()
-      productos.Nombre = objeto.nombre
-      productos.Descripcion = objeto.descripcion
-      productos.Cantidad = objeto.cantidad
+      productos.Nombre = objeto.Nombre
+      productos.Descripcion = objeto.Descripcion
+      productos.Cantidad = objeto.Cantidad
       await productos.save()
 
      return response.status(200).json({
@@ -39,9 +39,9 @@ class ProductoController {
   {
     const producto = await Producto.find(params.id)
     const objeto = request.all();
-    producto.Nombre = objeto.nombre
-    producto.Descripcion = objeto.descripcion
-    producto.Cantidad= objeto.cantidad
+    producto.Nombre = objeto.Nombre
+    producto.Descripcion = objeto.Descripcion
+    producto.Cantidad= objeto.Cantidad
     await producto.save()
     return response.status(200).json({
       Producto: 'Producto actualizada con exito!'
