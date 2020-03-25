@@ -4,26 +4,28 @@ const Vendedor = use('App/Models/Paquexpress/Vendedore')
 const Producto = use('App/Models/Paquexpress/Producto')
 const Transporte = use('App/Models/Paquexpress/Transporte')
 const Ciudad = use('App/Models/Paquexpress/Ciudade')
-const Pago = use('App/Models/Paquexpress/Pago')
+const TEnvio = use('App/Models/Paquexpress/TipoEnvio')
 const Usuario = use('App/Models/User');
 class EnvioController {
 
   async index ({request,auth, response })
   {
-    const envios = Envio.query().join('vendedores','id_Vendedor','=','vendedores.id')
+    const envios = Envio.query().join('vendedores','vendedores.id','=','id_Vendedor')
     .join('productos','envios.id_Producto','=','productos.id')
     .join('transportes','transportes.id','=','envios.id_transporte')
     .join('ciudades','ciudades.id','=','envios.id_Ciudad')
+    .join('tipo_envios','tipo_envios.id','=','id_TipoEnvio')
     .select('envios.id','vendedores.Nombre AS id_Vendedor', 'productos.Nombre AS id_Producto',
      'envios.created_at','envios.updated_at','transportes.Tipo AS id_transporte',
-     'ciudades.Ciudad AS id_Ciudad');
-
+     'ciudades.Ciudad AS id_Ciudad',
+     'tipo_envios.Nombre AS id_TipoEnvio');
 
     return response.status(200).json({
       productos: await Producto.all(),
       transportes : await Transporte.all(),
       ciudades : await Ciudad.all(),
       vendedores : await Vendedor.all(),
+      tenvios: await TEnvio.all(),
       envios : await envios.fetch()
   })
 
@@ -39,6 +41,7 @@ class EnvioController {
       envios.id_Producto = objeto.id_Producto
       envios.id_transporte = objeto.id_transporte
       envios.id_Ciudad = objeto.id_Ciudad
+      envios.id_TipoEnvio = objeto.id_TipoEnvio
       // envios.id_Pago = objeto.id_Pago
       await envios.save()
 
@@ -67,7 +70,7 @@ class EnvioController {
     envios.id_Producto = objeto.id_Producto
     envios.id_transporte = objeto.id_transporte
     envios.id_Ciudad = objeto.id_Ciudad
-    envios.id_Pago = objeto.id_Pago
+    envios.id_TipoEnvio = objeto.id_TipoEnvio
     await envios.save()
     return response.status(200).json({
       envio: 'Envio actualizada con exito!'

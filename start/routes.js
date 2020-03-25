@@ -69,6 +69,21 @@ Route.delete('Envios/:id','Paquexpress/EnvioController.delete');
 
 Route.get('Dashboard','Paquexpress/EnvioController.dashboard');
 
+// // // Envios testeado
+Route.get('Categorias','Paquexpress/CategoriaController.index');
+Route.post('Categorias','Paquexpress/CategoriaController.Insert');
+Route.get('Categorias/:id','Paquexpress/CategoriaController.edit');
+Route.put('Categorias/:id','Paquexpress/CategoriaController.update');
+Route.delete('Categorias/:id','Paquexpress/CategoriaController.delete');
+
+// // // Envios testeado
+Route.get('TipoEnvios','Paquexpress/TipoEnvioController.index');
+Route.post('TipoEnvios','Paquexpress/TipoEnvioController.Insert');
+Route.get('TipoEnvios/:id','Paquexpress/TipoEnvioController.edit');
+Route.put('TipoEnvios/:id','Paquexpress/TipoEnvioController.update');
+Route.delete('TipoEnvios/:id','Paquexpress/TipoEnvioController.delete');
+
+
 // // Clima
 Route.post('Clima','Paquexpress/ClimaController.consultar');
-}).prefix('api')
+ }).prefix('api')

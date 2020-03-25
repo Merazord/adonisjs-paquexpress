@@ -10,6 +10,7 @@ class ProductosSchema extends Schema {
       table.string('Nombre',120);
       table.string('Descripcion',150);
       table.integer('Cantidad');
+      table.integer('id_Categoria').unsigned().references('id').inTable('categorias');
       table.timestamps()
     })
   }
